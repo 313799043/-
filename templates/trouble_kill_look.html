@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <table border="1">
+        {% for row in trouble_list %}
+            <tr>
+                <td>{{ row.title }}</td>
+                <td>{{ row.create_user.nickname }}</td>
+                <td>{{ row.ctime|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ row.get_status_display }}</td>
+                {% if "EDIT" in request.permission_code_list %}
+                    <td> <a href="/trouble-kill.html?md=edit&nid={{ row.id }}">处理</a> </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
