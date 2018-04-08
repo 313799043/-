@@ -10,7 +10,7 @@ register = template.Library()
 
 
 def process_menu_tree_data(request):
-    print("进来")
+    print("进来自定义菜单")
     """
     根据Session中获取的菜单以及权限信息，结构化数据，生成特殊数据结构，如：
     [
@@ -55,6 +55,8 @@ def process_menu_tree_data(request):
         row['status'] = False
         row['child'] = []
         all_menu_dict[row['id']] = row
+    print("all_menu_dictsss")
+    print(all_menu_dict)
 
     """ 将权限信息挂靠在菜单上，并设置是否默认打开，以及默认显示 """
     for per in menu_permission_list:
@@ -100,12 +102,44 @@ def process_menu_tree_data(request):
 
 
 def build_menu_tree_html(menu_list):
+    # tpl1 =  """
+    #     <div class='rbac-menu-item'>
+    #         <div class='rbac-menu-header'>{0}</div>
+    #         <div class='rbac-menu-body {2}'>{1}</div>
+    #     </div>
+    # """
+
+#
+#
+#
+#
+#
+#         """
     tpl1 = """
-        <div class='rbac-menu-item'>
-            <div class='rbac-menu-header'>{0}</div>
-            <div class='rbac-menu-body {2}'>{1}</div>
+
+
+
+        <div class="list">
+            <ul class="yiji">
+                <li><a href="#" class="inactive">{0}</a>
+                    <ul style="display: none">
+                                <li>{1}</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    """
+
+
+
+
+
+
+
+
+            """
+
+
+
     tpl2 = """
         <a href='{0}' class='{1}'>{2}</a>
     """
@@ -127,18 +161,23 @@ def build_menu_tree_html(menu_list):
 
 @register.simple_tag
 def rbac_menu(request):
+    print("进入自定义模板")
     """
     根据Session中当前用户的菜单信息以及当前URL生成菜单
     :param request: 请求对象
     :return:
     """
     menu_tree_list = process_menu_tree_data(request)
+    print("menu_tree_list")
+    print(menu_tree_list)
     return mark_safe(build_menu_tree_html(menu_tree_list))
 
 
 @register.simple_tag
 def rbac_css():
-    file_path = os.path.join('rbac', 'theme', settings.RBAC_THEME, 'rbac.css')
+
+    # file_path = os.path.join('rbac', 'theme', settings.RBAC_THEME, 'rbac.css')
+    file_path = os.path.join('rbac', 'theme', settings.RBAC_THEME, 'bootstrap.css')
     if os.path.exists(file_path):
         return mark_safe(open(file_path, 'r', encoding='utf-8').read())
     else:
@@ -149,6 +188,7 @@ def rbac_css():
 def rbac_js():
     file_path = os.path.join('rbac', 'theme', settings.RBAC_THEME, 'rbac.js')
     if os.path.exists(file_path):
-        return mark_safe(open(file_path, 'r', encoding='utf-8').read())
+        # return mark_safe(open(file_path, 'r', encoding='utf-8').read())
+        return mark_safe(open(file_path, 'r', encoding='gb2312').read())
     else:
         raise Exception('rbac主题JavaScript文件不存在')

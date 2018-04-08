@@ -1,17 +1,63 @@
 {% extends 'layout.html' %}
 
+{% block css %}
+    <style>
+
+
+        .aa {
+            color: red;
+            width: 600px;
+            border: 40px;
+            position: relative;
+            margin: 10px;
+
+        }
+
+        .bb {
+            position: relative;
+            float: right;
+            margin-bottom: 10px;
+
+        }
+
+        .pagination {
+            margin: auto;
+            position: absolute;
+            margin-left: 30%;
+
+        }
+
+
+    </style>
+
+{% endblock %}
+
+
+
 {% block content %}
-    <div>
-        {% if "POST" in request.permission_code_list %}
-            <a href="/trouble.html?md=post">添加</a>
-        {% endif %}
-    </div>
-    <div>
-        <table border="1">
-            {% for row in trouble_list %}
+
+    <div class="aa">
+        <div class="bb">
+            {% if "POST" in request.permission_code_list %}
+                <a class="btn btn-danger" href="/trouble.html?md=post">添加新客户</a>
+            {% endif %}
+        </div>
+
+        <table class="table aa" border="1">
+            <tr>
+
+                <td>标题</td>
+                <td>录入工号</td>
+                <td>类型</td>
+                <td>操作</td>
+            </tr>
+
+            {% for row in trouble_list.object_list %}
                 <tr>
+
                     <td>{{ row.title }}</td>
                     <td>{{ row.status }}</td>
+                    <td>{{ row.get_ctype_display }} </td>
                     <td>
                         {% if 'EDIT' in request.permission_code_list %}
                             <a href="/trouble.html?md=edit&nid={{ row.id }}">编辑</a>
@@ -22,10 +68,45 @@
                         {% if 'DETAIL' in request.permission_code_list %}
                             <a href="/trouble.html?md=detail&nid={{ row.id }}">查看详细</a>
                         {% endif %}
+                        {% if 'ADDALL' in request.permission_code_list %}
+                            <a href="/trouble.html?md=addall&nid={{ row.id }}">设为共客</a>
+                        {% endif %}
+
+                        {% if 'BBB' in request.permission_code_list %}
+                            <a href="/trouble.html?md=bbb&nid={{ row.id }}">更进</a>
+                        {% endif %}
 
                     </td>
                 </tr>
             {% endfor %}
+
+
         </table>
+        <div>
+            <ul class="pagination">
+                {% if trouble_list.has_previous %}
+                    <li><a href="?{{ trouble_list.previous_page_number.querystring }}">上一页</a></li>
+                {% endif %}
+                {% for page in trouble_list.pages %}
+                    {% if page %}
+                        {% ifequal page trouble_list.number %}
+                            <li><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                        {% else %}
+                            <li><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                        {% endifequal %}
+                    {% else %}
+                        <li><a href="">...</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if trouble_list.has_next %}
+                    <li><a href="?{{ trouble_list.next_page_number.querystring }}">下一页</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+
     </div>
+
+
+
 {% endblock %}

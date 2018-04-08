@@ -1,15 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <form action="/trouble.html?md=post" method="POST">
-        {% csrf_token %}
-        <input type="text" name="title" />
-        <textarea name="content"></textarea>
-        <input type="submit" value="提交" />
+{#<!DOCTYPE html>#}
+
+{% extends 'layout.html' %}
+
+
+{% block css %}
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background-color: #f9f9f9;
+        }
+
+        .clears {
+            clear: both;
+        }
+
+        /*messages*/
+        .messages {
+            padding: 15px 0;
+        }
+
+        .messages input, .messages select, .messages textarea {
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: 0;
+        }
+
+        .messlist {
+            height: 30px;
+            margin-bottom: 10px;
+        }
+
+        .messlist label {
+            float: left;
+            width: 100px;
+            height: 30px;
+            font-size: 14px;
+            line-height: 30px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .messlist input {
+            float: left;
+            width: 300px;
+            height: 28px;
+            padding-left: 5px;
+            border: #ccc 1px solid;
+        }
+
+        .messlist.textareas {
+            height: auto;
+        }
+
+        .messlist textarea {
+            float: left;
+            width: 400px;
+            height: 110px;
+            padding: 5px;
+            border: #ccc 1px solid;
+        }
+
+        .messlist.yzms input {
+            width: 100px;
+        }
+
+        .messlist.yzms .yzmimg {
+            float: left;
+            margin-left: 10px;
+        }
+
+        .messsub {
+            padding: 0px 0 0 110px;
+        }
+
+        .messsub input {
+            width: 100px;
+            height: 35px;
+            background: #ddd;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 5px
+        }
+
+        .messsub input:hover {
+            background: #f60;
+            color: #fff;
+        }
+    .aa{
+        height: 30px;
+        font-size: 14px;
+            font-weight: bold;
+    }
+
+    </style>
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div class="sendbox">
+
+    <form action="/trouble.html?md=post" method="POST" class="messages">
+         {% csrf_token %}
+        <div class="messlist">
+            <label>姓名</label>
+            <input name="title" type="text" placeholder="姓名" >
+
+        </div>
+
+        <div class="messlist textareas">
+            <label>房源描述</label>
+            <textarea name="content" placeholder="说点什么吧..."  ></textarea>
+            <div class="clears"></div>
+        </div>
+
+        <div class="messlist textareas">
+            <label>客户需求</label>
+                <select name="jy" class="aa" name="jy">
+                    <option value="1">租房</option>
+                    <option value="2">买房</option>
+                    <option value="3">卖房</option>
+                </select>
+
+        </div>
+
+        <div class="messsub">
+            <input type="submit" value="提交" style="background:#00a3eb;color:#fff;"/>
+            <input type="reset" value="重填"/>
+        </div>
     </form>
-</body>
-</html>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

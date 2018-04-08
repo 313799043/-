@@ -17,12 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from web import views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     url(r'^login.html$', views.login),
     url(r'^index.html$', views.index),
     url(r'^trouble.html$', views.trouble),
+    url(r'^mytrouble.html$', views.trouble),
     url(r'^trouble-kill.html$', views.trouble_kill),
     url(r'^report.html$', views.report),
+    url(r'^trouble_add.html$', views.add),
+    url(r'^update.html$', views.update),
+
+
 
 ]

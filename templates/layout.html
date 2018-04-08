@@ -5,37 +5,150 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        body{
+        .yiji{margin: 0;padding: 0}
+
+        body {
+            margin: 0;
             margin: 0;
         }
-        .pd-header{
+
+        .pd-header {
             height: 48px;
             background-color: brown;
         }
-        .pd-body .menu{
+
+        .pd-body .menu {
+            padding-top: 40px;
             float: left;
+            height: 800px;
             width: 20%;
+            margin: 10px;
+            padding-bottom: 40px;
+
+{#            padding: 0;#}
+            background-color: #46b8da;
+{#            position: absolute;#}
         }
-        .pd-body .content{
+
+        .pd-body .content {
             float: left;
-            width: 80%;
+            width: 70%;
+
         }
+
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-size: 12px;
+            font-family: "宋体", "微软雅黑";
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        a:link, a:visited {
+            text-decoration: none;
+        }
+
+        .list {
+            width: 210px;
+
+            margin-left: 40px ;
+
+        }
+
+        .list ul li {
+            background-color: #467ca2;
+            border: solid 1px #316a91;
+            border-bottom: 0;
+        }
+
+        .list ul li a {
+            padding-left: 10px;
+            color: #fff;
+            font-size: 12px;
+            display: block;
+            font-weight: bold;
+            height: 36px;
+            line-height: 30px;
+            position: relative;
+        }
+
+        .list ul li .inactive {
+{#            background: url(images/off.png) no-repeat 184px center;#}
+        }
+
+        .list ul li .inactives {
+{#            background: url(images/on.png) no-repeat 184px center;#}
+        }
+
+        .list ul li ul {
+            display: none;
+        }
+
+        .list ul li ul li {
+            border-left: 0;
+            border-right: 0;
+            background-color: #6196bb;
+            border-color: #467ca2;
+
+        }
+
+        .list ul li ul li ul {
+            display: none;
+        }
+
+        .list ul li ul li a {
+            padding-left: 20px;
+        }
+
+        .list ul li ul li ul li {
+            background-color: #d6e6f1;
+            border-color: #6196bb;
+        }
+
+        .last {
+            background-color: #d6e6f1;
+            border-color: #6196bb;
+        }
+
+        .list ul li ul li ul li a {
+            color: #316a91;
+            padding-left: 30px;
+        }
+
         {% rbac_css %}
     </style>
-    {% block css %}{% endblock %}
+    {% block css %}
+
+    {% endblock %}
+
 </head>
 <body>
-    <div class="pd-header"></div>
-    <div class="pd-body">
+<div class="pd-header"></div>
+<div></div>
+<div class="pd-body">
+    <div>
+
         <div class="menu">{% rbac_menu request %}</div>
+
         <div class="content">
             {% block content %}{% endblock %}
         </div>
     </div>
+
+
     <script src="/static/jquery-1.12.4.js"></script>
     <script>
         {% rbac_js %}
     </script>
     {% block js %}{% endblock %}
+</div>
+
+
 </body>
 </html>

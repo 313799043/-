@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rbac',
     'web',
+    'pure_pagination',
 ]
 
 MIDDLEWARE = [
@@ -121,12 +122,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
-)
-
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR,'static'),
+# )
+STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),)
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+
 
 
 
@@ -139,6 +141,7 @@ RBAC_NO_AUTH_URL = [
     '/register.html',
     '/admin.*',
     '/rbac.*',
+
 ]
 
 # session中保存权限信息的Key

@@ -8,6 +8,7 @@
                 <td>{{ row.create_user.nickname }}</td>
                 <td>{{ row.ctime|date:"Y-m-d H:i:s" }}</td>
                 <td>{{ row.get_status_display }}</td>
+
                 {% if "EDIT" in request.permission_code_list %}
                     <td> <a href="/trouble-kill.html?md=edit&nid={{ row.id }}">处理</a> </td>
                 {% endif %}
